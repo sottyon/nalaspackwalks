@@ -20,9 +20,9 @@ a{color:var(--pri)}
 :focus-visible{outline:3px solid var(--ball);outline-offset:2px}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
 section{padding:64px 0}
-header{display:flex;flex-direction:column;align-items:center;padding:16px 20px 24px;max-width:1040px;margin:0 auto;gap:12px}
+header{display:flex;flex-direction:column;align-items:center;padding:16px 20px 24px;max-width:1040px;margin:0 auto;gap:8px}
 .logo{display:block;line-height:0}
-.logo img{display:block;width:min(240px,70vw);height:auto;border-radius:12px}
+.logo img{display:block;width:min(480px,92vw);height:auto}
 nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px}
 nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
 nav .btn{color:var(--pri-ink);padding:10px 20px}
@@ -33,11 +33,9 @@ nav .btn{color:var(--pri-ink);padding:10px 20px}
 .hero .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
 .hero p.lead{font-size:1.2rem;color:var(--mute)}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.hero-art{background:var(--ball);border-radius:36px 36px 120px 36px;aspect-ratio:1/1;display:grid;place-items:center;position:relative;overflow:hidden}
-.hero-art svg{width:78%}
-.ballrun{position:absolute;right:12%;bottom:12%;width:44px;height:44px;border-radius:50%;background:var(--bg);animation:bounce 1.6s ease-in-out infinite alternate}
-@keyframes bounce{to{transform:translate(-90px,-70px)}}
-@media (prefers-reduced-motion:reduce){.ballrun{animation:none}html{scroll-behavior:auto}}
+.hero-art{display:grid;place-items:center}
+.hero-art img{display:block;width:100%;height:auto}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
 .card .price{font:800 1.8rem "Bricolage Grotesque",serif;color:var(--pri)}
@@ -79,7 +77,7 @@ footer{padding:36px 20px;text-align:center;color:var(--mute);font-size:.95rem}
 </head>
 <body>
 <header>
-<a class="logo" href="#top" aria-label="Nala’s Pack Walks home"><img src="assets/nalas-pack-walks-logo.png" alt="Nala’s Pack Dog Walking logo"></a>
+<a class="logo" href="#top" aria-label="Nala’s Pack Walks home"><img src="assets/nalas-pack-walks-wordmark.png" alt="Nala’s Pack Dog Walking"></a>
 <nav><a href="#services">Services</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a class="btn" href="#book">Book now</a></nav>
 </header>
 
@@ -92,8 +90,7 @@ footer{padding:36px 20px;text-align:center;color:var(--mute);font-size:.95rem}
 <p class="hint" style="margin-top:14px">Serving Old Town, Del Ray, Carlyle, Potomac Yard and nearby Arlington.</p>
 </div>
 <div class="hero-art" aria-hidden="true">
-<svg viewBox="0 0 200 200"><g fill="none" stroke="#44362f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M30 120c0-30 24-48 56-48h40c22 0 44 10 44 34v14"/><path d="M62 74c-4-22 2-36 16-44l6 28M126 72c4-20 14-30 28-34l-2 30"/><path d="M52 120v40M80 126v34M132 126v34M160 118v42"/></g><circle cx="148" cy="96" r="5" fill="#44362f"/></svg>
-<div class="ballrun"></div>
+<img src="assets/nalas-pack-walks-logo.png" alt="">
 </div>
 </div></section>
 
