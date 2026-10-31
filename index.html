@@ -199,10 +199,10 @@ footer{padding:36px 20px;text-align:center;color:var(--mute);font-size:.95rem}
 <div id="petsBox" hidden><label class="l" for="pets">Which other pets live in the home?</label><input type="text" id="pets" placeholder="e.g. 1 cat named Milo, 2 other dogs"></div>
 <p class="err" id="err" role="alert"></p>
 <button type="submit" class="btn ball">Send booking request</button>
-<div class="done" id="done" tabindex="-1">
-<b>Your email app should now be open with your request ready to send.</b>
-<p style="margin:.5em 0">Didn’t open? Copy the request and email it to <a href="mailto:nalaspackwalks@gmail.com">nalaspackwalks@gmail.com</a> or text <a href="sms:+15555555555">(555) 555-5555</a>.</p>
-<button type="button" class="btn ghost" id="copy">Copy request</button>
+<div class="done" id="done" tabindex="-1" role="status">
+<b id="doneT"></b>
+<p id="doneP" style="margin:.5em 0"></p>
+<button type="button" class="btn ghost" id="copy" hidden>Copy request</button>
 </div>
 </form>
 </div></section>
@@ -266,8 +266,17 @@ $('f').addEventListener('submit',function(e){
  if(s==='house')L.push('End: '+$('end').value);else{L.push('Visits: '+$('visits').value);L.push('Time: '+$('time').value)}
  L.push('Dogs: '+$('dogs').value,'Dog name(s): '+$('dogName').value,'Breed/age: '+$('breed').value,'Neighborhood: '+$('hood').value,'Only pet in home: '+(only()==='yes'?'Yes':'No. Other pets: '+$('pets').value),'Notes: '+$('notes').value,'Estimate: $'+calc()+(isRush()?' (includes $5 squeeze-in fee)':''),'','Name: '+$('name').value,'Phone: '+$('phone').value,'Email: '+$('email').value);
  msg=L.join('\n');
- var d=$('done');d.style.display='block';d.focus();
- location.href='mailto:nalaspackwalks@gmail.com?subject='+encodeURIComponent('Booking request: '+label+' for '+$('dogName').value)+'&body='+encodeURIComponent(msg)});
+ var d=$('done'),btn=$('f').querySelector('button[type=submit]'),subj='Booking request: '+label+' for '+$('dogName').value;
+ function show(t,p,cp){$('doneT').textContent=t;$('doneP').innerHTML=p;$('copy').hidden=!cp;d.style.display='block';d.focus();btn.disabled=false;btn.textContent='Send booking request'}
+ btn.disabled=true;btn.textContent='Sending\u2026';
+ fetch('https://formsubmit.co/ajax/nalaspackwalks@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+  body:JSON.stringify({_subject:subj,_template:'box',name:$('name').value,email:$('email').value,phone:$('phone').value,request:msg})})
+ .then(function(r){if(!r.ok)throw new Error('send failed');return r.json()})
+ .then(function(){show('Request sent! Thank you.','Nala\u2019s Pack Walks will reply by email within one business day to set up your free meet and greet.',false)})
+ .catch(function(){
+  show('We couldn\u2019t send that automatically.','Your email app should open with your request ready to send. If it doesn\u2019t, copy the request and email it to <a href="mailto:nalaspackwalks@gmail.com">nalaspackwalks@gmail.com</a> or text <a href="sms:+15555555555">(555) 555-5555</a>.',true);
+  location.href='mailto:nalaspackwalks@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(msg);
+ });});
 $('copy').addEventListener('click',function(){
  try{navigator.clipboard.writeText(msg).then(function(){$('copy').textContent='Copied'})}catch(x){$('copy').textContent='Select and copy manually'}});
 ui();
