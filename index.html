@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nala’s Pack Walks | Dog walking, sitting &amp; house sitting in Alexandria, VA</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JL8WWECES0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JL8WWECES0');
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light;--bg:#d0efef;--card:#fff;--ink:#44362f;--mute:#6b5b54;--pri:#44362f;--pri-ink:#fff;--ball:#fdbfce;--line:#dbdfeb;--soft:#dbdfeb;
@@ -270,7 +278,10 @@ $('f').addEventListener('submit',function(e){
  fetch('https://formsubmit.co/ajax/booking@nalaspackwalks.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
   body:JSON.stringify({_subject:subj,_template:'box',name:$('name').value,email:$('email').value,phone:$('phone').value,request:msg})})
  .then(function(r){if(!r.ok)throw new Error('send failed');return r.json()})
- .then(function(){show('Request sent! Thank you.','Nala\u2019s Pack Walks will reply by email within one business day to set up your free meet and greet.',false)})
+ .then(function(){
+  gtag('event','generate_lead',{form_name:'booking_request',service:s});
+  show('Request sent! Thank you.','Nala\u2019s Pack Walks will reply by email within one business day to set up your free meet and greet.',false)
+ })
  .catch(function(){
   show('We couldn\u2019t send that automatically.','Your email app should open with your request ready to send. If it doesn\u2019t, copy the request and email it to <a href="mailto:booking@nalaspackwalks.com">booking@nalaspackwalks.com</a>.',true);
   location.href='mailto:booking@nalaspackwalks.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(msg);
