@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Site editor | Nala’s Pack Walks</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#d0efef;--card:#fff;--ink:#44362f;--mute:#6b5b54;--pri:#44362f;--ball:#fdbfce;--line:#dbdfeb;--soft:#dbdfeb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,serif;line-height:1.15}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.2em 0}
+h2{font-size:1.5rem;margin:0 0 .4em}
+h3{font-size:1.15rem;margin:0 0 .4em}
+p{max-width:70ch}
+a{color:var(--pri)}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #b44768;outline-offset:2px}
+.wrap{width:min(920px,100% - 32px);margin:0 auto}
+header{padding:24px 0 16px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;margin:16px 0}
+.hint{color:var(--mute);font-size:.92rem;margin:.5em 0}
+.field{display:grid;gap:5px;margin:12px 0}
+.field label,.price-field label{font-weight:600}
+input[type=text],input[type=password],input[type=number],input[type=date],select,textarea{width:100%;border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+input[type=number]{max-width:190px}
+textarea{min-height:110px;resize:vertical}
+.btn{border:0;border-radius:999px;background:var(--pri);color:#fff;padding:11px 20px;font-weight:600}
+.btn.secondary{background:var(--soft);color:var(--ink)}
+.btn.danger{background:#a42d3c}
+.btn:disabled{opacity:.55;cursor:wait}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.notice{border-radius:12px;padding:12px 14px;margin:12px 0;background:var(--soft)}
+.notice.error{background:#fff0f0;color:#8b1e2b}
+.notice.success{background:#e8f5e9;color:#225c2b}
+.steps{padding-left:1.3em}
+.steps li{margin:.35em 0}
+.prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px}
+.price-field{display:grid;gap:5px;padding:10px 0;border-bottom:1px solid var(--line)}
+.review-card{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.review-card textarea{min-height:85px}
+.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 0 12px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.weekday{text-align:center;font-size:.85rem;font-weight:600;color:var(--mute);padding:6px 0}
+.day{min-height:48px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.day:disabled{opacity:.42;cursor:not-allowed}
+.day.empty{border:0;background:transparent}
+.day.available{background:#e8f5e9;border-color:#76a97b}
+.day.unavailable{background:#fff0f0;border-color:#ce8990}
+.day.today{box-shadow:inset 0 0 0 2px var(--pri)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.legend span{display:flex;gap:6px;align-items:center;font-size:.9rem}
+.swatch{width:14px;height:14px;border:1px solid var(--line);border-radius:4px;background:#fff}
+.swatch.available{background:#e8f5e9;border-color:#76a97b}
+.swatch.unavailable{background:#fff0f0;border-color:#ce8990}
+.managed-list{padding-left:1.2em}
+.managed-list li{margin:5px 0}
+@media(max-width:600px){.panel{padding:18px}.prices{grid-template-columns:1fr}.day{min-height:42px;padding:4px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="topline"><div><p class="hint" style="margin:0">Nala’s Pack Walks</p><h1>Site editor</h1></div><a href="index.html">View public site</a></div>
+  <p class="hint">Private local editor. Update your rates, reviews, and calendar. Saving publishes the changes to the site through GitHub.</p>
+</header>
+
+<section class="panel" id="connect-panel">
+  <h2>Connect to GitHub</h2>
+  <p class="hint">Create a fine-grained personal access token for the <b>sottyon/nalaspackwalks</b> repository with <b>Contents: Read and write</b> permission. The token is used only in this browser tab and is cleared when you close it.</p>
+  <ol class="steps">
+    <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a fine-grained token</a> and select only the <b>nalaspackwalks</b> repository.</li>
+    <li>Under repository permissions, set <b>Contents</b> to <b>Read and write</b>, then generate the token.</li>
+    <li>Paste the token below and connect. Never share the token with anyone.</li>
+  </ol>
+  <form id="connect-form">
+    <div class="field"><label for="token">GitHub token</label><input id="token" type="password" autocomplete="off" required></div>
+    <div class="actions"><button class="btn" type="submit">Connect and load editor</button></div>
+  </form>
+</section>
+
+<main id="editor" hidden>
+  <div class="topline">
+    <p id="connection-status" class="hint" role="status"></p>
+    <div class="actions"><button id="save" class="btn" type="button">Save and publish</button><button id="disconnect" class="btn secondary" type="button">Disconnect</button></div>
+  </div>
+  <p id="message" class="notice" role="status" hidden></p>
+
+  <section class="panel">
+    <h2>Prices</h2>
+    <p class="hint">Amounts are in US dollars. These prices also update the booking estimate.</p>
+    <div id="prices" class="prices"></div>
+  </section>
+
+  <section class="panel">
+    <div class="topline"><div><h2>Reviews</h2><p class="hint">Only add reviews you have permission to publish.</p></div><button id="add-review" class="btn secondary" type="button">Add a review</button></div>
+    <div id="reviews"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Availability</h2>
+    <p class="hint">Choose a status, then select future dates on the calendar. Dates without a status appear as “Ask us” on your public site.</p>
+    <div class="field"><label for="availability-mode">When you click a date</label><select id="availability-mode"><option value="available">Mark available</option><option value="unavailable">Mark unavailable</option><option value="clear">Clear status (ask us)</option></select></div>
+    <div class="calendar-head"><button id="previous-month" class="btn secondary" type="button" aria-label="Previous month">‹</button><h3 id="calendar-month" aria-live="polite"></h3><button id="next-month" class="btn secondary" type="button" aria-label="Next month">›</button></div>
+    <div id="calendar" class="calendar-grid" role="grid" aria-label="Edit availability"></div>
+    <div class="legend"><span><i class="swatch available"></i>Available</span><span><i class="swatch unavailable"></i>Unavailable</span><span><i class="swatch"></i>Not set</span></div>
+    <h3>Dates with a status</h3><ul id="managed-dates" class="managed-list"></ul>
+  </section>
+  <p class="hint">Saving creates a commit in the site’s GitHub repository. The public site updates after GitHub Pages finishes publishing.</p>
+</main>
+</div>
+<script src="admin.js"></script>
+</body>
+</html>
