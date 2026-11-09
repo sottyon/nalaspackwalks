@@ -1,0 +1,13 @@
+{
+  "prices": {
+    "walk30": 28,
+    "walk60": 42,
+    "dropin": 25,
+    "house": 95,
+    "additionalDogWalkVisit": 8,
+    "additionalDogHouse": 10,
+    "rushFee": 5
+  },
+  "reviews": [],
+  "availability": {}
+}
