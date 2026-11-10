@@ -8,6 +8,41 @@
     "additionalDogHouse": 10,
     "rushFee": 5
   },
-  "reviews": [],
-  "availability": {}
+  "reviews": [
+    {
+      "quote": "Sydney was amazing with my high-energy 1-year-old pit/lab mix puppy! He is extremely high energy and not the best on leash, but he cooperates great with Sydney. My puppy is always excited to see her, and knows he is going to have a great time. Sydney is punctual and has great communication, she takes the best update photos! I always feel at ease when my puppy is in her care.",
+      "author": "Kevon, Alexandria ",
+      "rating": 5
+    }
+  ],
+  "availability": {
+    "2026-11-24": "unavailable",
+    "2026-11-25": "unavailable",
+    "2026-11-26": "unavailable",
+    "2026-11-27": "unavailable",
+    "2026-11-28": "unavailable",
+    "2026-12-23": "unavailable",
+    "2026-12-24": "unavailable",
+    "2026-12-25": "unavailable",
+    "2026-12-26": "unavailable",
+    "2026-12-27": "unavailable",
+    "2026-11-11": "available",
+    "2026-11-12": "available",
+    "2026-11-13": "available",
+    "2026-11-14": "available",
+    "2026-11-20": "available",
+    "2026-11-21": "available",
+    "2026-11-29": "available",
+    "2026-11-30": "available",
+    "2026-12-04": "available",
+    "2026-12-05": "available",
+    "2026-12-11": "available",
+    "2026-12-12": "available",
+    "2026-12-18": "available",
+    "2026-12-19": "available",
+    "2026-12-31": "available",
+    "2026-12-30": "available",
+    "2026-12-29": "available",
+    "2026-12-28": "available"
+  }
 }
